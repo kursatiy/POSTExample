@@ -24,22 +24,20 @@ public class WebsiteApi {
         return HttpClientBuilder.create().setDefaultHeaders(ct).setDefaultCookieStore(cookieStore).build();
     }
 
-    public String  postRequest() throws IOException {
+    public String  postRequest() {
         HttpClient client =  createHTTPClient();
         HttpPost postMethod = new HttpPost("http://instatestvx.me/api/auth/login");
-        int code;
-        String message = "empty";
+        String message = "";
         try{
             JSONObject jsonObject = new JSONObject();
-            JSONObject params = new JSONObject();
-            params.put("login", "hello@world.com");
-            params.put("password", "12345678");
-            jsonObject.put("params", params); //what is it?
+            jsonObject.put("login", "hello@world.com");
+            jsonObject.put("password", "12345678");
             postMethod.setEntity(new StringEntity(jsonObject.toString(), Charset.forName("UTF-8")));
             HttpResponse response = client.execute(postMethod);
-            code = response.getStatusLine().getStatusCode();
             message = new JSONObject(EntityUtils.toString(response.getEntity())).get("message").toString();
-        } catch (JSONException e){
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e){
             e.printStackTrace();
         }
         return message;

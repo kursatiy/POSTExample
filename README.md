@@ -1,1 +1,1 @@
-# Example of POST request via RestAssured.
+# Example of POST request to the .
