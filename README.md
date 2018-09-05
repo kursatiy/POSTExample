@@ -1,1 +1,1 @@
-# Example of POST request to the .
+# Example of POST request to the "http://instatestvx.me" server.
